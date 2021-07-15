@@ -1,0 +1,10 @@
+const String initialRoute = "home";
+const String homeGetXRoute = "home_getx";
+const String addDetailsGetXRout = "add_getx";
+const String updateDetailsGetXRoute = "update_getx";
+const String homeBlockRoute = "home_block";
+const String addDetailsBlockRout = "add_block";
+const String updateDetailsBlockRoute = "update_block";
+const String homeProviderRoute = "home_provider";
+const String addDetailsProviderRout = "add_provider";
+const String updateDetailsProviderRoute = "update_provider";
