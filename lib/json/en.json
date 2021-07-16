@@ -2,6 +2,8 @@
   "title": "Flutter",
   "delete":"Delete",
   "update": "Update",
+  "dx_value": "-5.0",
+  "dy_value": "0.7",
   "flutter_state_management": "Flutter State Management",
   "get_x": "GetX",
   "provider": "Provider",

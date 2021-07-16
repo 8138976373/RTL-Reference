@@ -5,7 +5,7 @@ class CustomButton extends StatelessWidget {
   double? width;
   double? radius;
   double? elevation;
-  Color? bgColor;
+  Color? color;
   String? text;
   double? size;
   Color? textColor;
@@ -29,7 +29,7 @@ class CustomButton extends StatelessWidget {
     Key? key,
     this.text,
     this.size,
-    this.bgColor,
+    this.color,
     this.textColor,
     this.margin,
     this.marginLeft,
@@ -75,10 +75,10 @@ class CustomButton extends StatelessWidget {
   }
 
   Color? setBgColor() {
-    if (this.bgColor == null) {
-      return this.bgColor = Colors.black;
+    if (this.color == null) {
+      return this.color = Colors.black;
     } else {
-      return this.bgColor;
+      return this.color;
     }
   }
 
@@ -152,6 +152,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: this.width,
+      padding: setPadding(),
       margin: setMargin(),
       child: MaterialButton(
         shape: RoundedRectangleBorder(
