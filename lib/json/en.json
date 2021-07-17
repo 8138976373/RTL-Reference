@@ -3,6 +3,8 @@
   "delete":"Delete",
   "update": "Update",
   "dx_value": "-5.0",
+  "dx_value_reverse": "5.0",
+  "dy_value_reverse":"-0.7",
   "dy_value": "0.7",
   "flutter_state_management": "Flutter State Management",
   "get_x": "GetX",

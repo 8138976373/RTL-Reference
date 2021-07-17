@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rtl_flutter/Localization/languages.dart';
 import 'package:rtl_flutter/Localization/localization_constants.dart';
 import 'package:rtl_flutter/main.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
-  Alignment _dragAlignment = Alignment.center;
+  // Alignment _dragAlignment = Alignment.center;
 
   setAnimation(BuildContext context){
     late final AnimationController _controller =
@@ -24,10 +25,21 @@ class _HomePageState extends State<HomePage>
       ..repeat();
     late final Animation<Offset> _animation =
     Tween<Offset>(begin: Offset.zero, end: Offset(
-        double.parse(getTranslated(context,'dx_value') ?? '.5')  ,
+        double.parse(getTranslated(context,'dx_value') ?? '5')  ,
         double.parse(getTranslated(context,'dy_value')??'.7')))
         .animate(_controller);
-    print((getTranslated(context,'dy_value')??'222'));
+    return _animation;
+  }
+
+  setAnimationReverse(BuildContext context){
+    late final AnimationController _controller =
+    AnimationController(vsync: this, duration: Duration(seconds: 3))
+      ..repeat();
+    late final Animation<Offset> _animation =
+    Tween<Offset>(begin: Offset.zero, end: Offset(
+        double.parse(getTranslated(context,'dx_value_reverse') ?? '5')  ,
+        double.parse(getTranslated(context,'dy_value_reverse')??'.7')))
+        .animate(_controller);
     return _animation;
   }
 
@@ -45,23 +57,21 @@ class _HomePageState extends State<HomePage>
           slivers: <Widget>[
 
             SliverAppBar(
-              // automaticallyImplyLeading: false,
-              //       title:
-              //           Text('RTL Demonstration APP'),
               actions: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(right: 20, left: 20, bottom: 10),
+                  padding: const EdgeInsets.only(right: 20, left: 20, bottom: 10,top: 20),
                   child: DropdownButton<Language>(
                     underline: SizedBox(),
-                    icon: Center(
-                      child: SlideTransition(
-                        position: setAnimation(context),
-                      child: Icon(
-                        Icons.bubble_chart,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                    ),),
+                    icon:  Row(
+                      children: [
+                        SizedBox(height: 100,),
+                        Icon(
+                            Icons.language,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                      ],
+                    ),
                     onChanged: (Language? language) async {
                       _changeLanguage(context, language!);
                     },
@@ -90,26 +100,65 @@ class _HomePageState extends State<HomePage>
                 padding: const EdgeInsets.all(
                   40.0,
                 ),
-                child: Row(
+                child: Column(
                   children: [
-                    Text(
-                      getTranslated(context, 'title') ?? 'RTL Demonstration APP',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                    Center(
+                      child: SlideTransition(
+                        position: setAnimationReverse(context),
+                        child: Icon(
+                          Icons.bubble_chart,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                      ),),
+
+                    Row(
+                      children: [
+                         SlideTransition(
+                            position: setAnimationReverse(context),
+                            child: Icon(
+                              Icons.bubble_chart,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                          ),
+                        Spacer(flex: 1,),
+                        Center(
+                          child: SlideTransition(
+                            position: setAnimation(context),
+                            child: Icon(
+                              Icons.bubble_chart,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                          ),),
+                      ],
                     ),
-                    CustomButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Click here',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.red,
-                      padding: 50,
-                      paddingRight: 50,
-                    )
+
+                    Row(
+                      children: [
+                        Text(
+                          getTranslated(context, 'title') ?? 'RTL Demonstration APP',
+                          style: GoogleFonts.sofia(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white)
+                          // style: TextStyle(
+                          //   fontSize: 20,
+                          //   fontWeight: FontWeight.bold,
+                          //   color: Colors.white,
+                          // ),
+                        ),
+                        Spacer(flex: 1,),
+                        CustomButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Click here',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          color: Colors.red,
+                          paddingRight: 50,
+                          paddingLeft: 50,
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -147,7 +196,7 @@ class _HomePageState extends State<HomePage>
             child: Center(
               child: ListBody(
                 children: <Widget>[
-                  CustomButton(
+                  CustomButton(paddingBottom: 10,
                     child: Text(
                       getTranslated(context, 'update') ?? 'Update',
                       style: TextStyle(color: Colors.white),

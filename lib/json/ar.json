@@ -6,6 +6,8 @@
   "description": "وصف",
   "dx_value": "5.2",
   "dy_value": "0.7",
+  "dx_value_reverse": "-5.0",
+  "dy_value_reverse":"-0.7",
   "flutter_state_management": " إدارة حالة الرفرفة",
   "getx": "GetX",
   "provider": "مزود",
